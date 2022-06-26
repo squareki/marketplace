@@ -1,13 +1,10 @@
-from datetime import datetime
 import enum
 
 from app.db import engine
 
-from sqlalchemy import DateTime, create_engine, Column, Enum, Integer, String, ForeignKey
+from sqlalchemy import DateTime, Column, Enum, Integer, String, ForeignKey
 from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy.orm import declarative_base, relationship, joinedload, sessionmaker
-
-from sqlalchemy.ext.associationproxy import association_proxy
+from sqlalchemy.orm import declarative_base, relationship
 
 # Make the DeclarativeMeta
 Base = declarative_base()

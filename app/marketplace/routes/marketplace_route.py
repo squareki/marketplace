@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends
 
 from app.db import get_db
 
@@ -22,8 +22,3 @@ def delete_node(id: str, db: Session = Depends(get_db)):
 @router.get("/nodes/{id}", response_model=ShopUnit)
 def get_node(id: str, db: Session = Depends(get_db)):
     return marketplace_crud.get_unit_recursive(id, db)
-
-@router.get("/nodes2/{id}", response_model=ShopUnit)
-def get_node(id: str, db: Session = Depends(get_db)):
-    return marketplace_crud.get_unit(id, db)
-

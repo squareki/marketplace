@@ -1,9 +1,9 @@
 from datetime import datetime, timezone
 from enum import Enum
 
-from typing import List, Optional, Union
+from typing import List, Optional
 from uuid import UUID
-from pydantic import BaseModel, Field, PrivateAttr, validator
+from pydantic import BaseModel, PrivateAttr
 
 from app.marketplace.models import models
 
@@ -30,12 +30,8 @@ class ShopUnit(ShopUnitImport):
     date: datetime
     children: Optional[List["ShopUnit"]] = None
 
-    #_orm_model: DeclarativeMeta = PrivateAttr(models.ShopUnit)
     _orm_model = PrivateAttr(models.ShopUnit)
 
-
-    # class Config:
-    #     orm_mode = True
     class Config:
         use_enum_values = True
         json_encoders = {
