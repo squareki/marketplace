@@ -69,7 +69,7 @@ def get_unit_recursive(id: str, db: Session) -> sc.ShopUnit:
                 children.append(f)
         return children
     
-    filename = os.path.join(os.path.dirname(__file__), "marketplace_cte2.sql")
+    filename = os.path.join(os.path.dirname(__file__), "marketplace_cte.sql")
     with open(filename, "r") as (file, err):
         if err:
             raise BaseError(message="Internal load failed")
