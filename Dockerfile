@@ -22,4 +22,4 @@ COPY . /code
 
 # 
 #CMD ["uvicorn", "app.fastapi_app:app", "--host", "0.0.0.0", "--port", "80"]
-CMD ["python", "uvicorn", "app.main:app", "--port", "80"]
+CMD ["uvicorn", "app.main:app", "--port", "80"]
