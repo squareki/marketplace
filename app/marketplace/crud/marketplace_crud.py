@@ -70,21 +70,21 @@ def get_unit_recursive(id: str, db: Session) -> sc.ShopUnit:
         return children
     
     filename = os.path.join(os.path.dirname(__file__), "marketplace_cte.sql")
-    with open(filename, "r") as (file, err):
-        if err:
-            raise BaseError(message="Internal load failed")
+    try:
+        with open(filename, "r") as file:
+            contents = file.read()
+            formated = contents.replace("{id}", f"{id}")
+            query = text(formated)
 
-        contents = file.read()
-        formated = contents.replace("{id}", f"{id}")
-        query = text(formated)
-
-        result = db.execute(query).all()
-        for u in result:
-            form_id = uuid.UUID(id)
-            if u[0] == form_id:
-                parent = sc.ShopUnit.from_orm(u)
-                parent.children = find_children(form_id, result)
-                return parent
+            result = db.execute(query).all()
+            for u in result:
+                form_id = uuid.UUID(id)
+                if u[0] == form_id:
+                    parent = sc.ShopUnit.from_orm(u)
+                    parent.children = find_children(form_id, result)
+                    return parent
+    except IOError:
+        raise BaseError(message="Internal load failed")
     
     raise ObjectNotFoundError
 
