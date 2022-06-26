@@ -1,0 +1,22 @@
+services:
+  api:
+    build: .
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+      - migrations
+  db:
+    image: postgres:13
+    restart: always
+    environment:
+      POSTGRES_DB: marketplace
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: '1'
+    ports:
+      - "5432:5432"
+  migrations:
+    build: .
+    command: alembic upgrade head
+    depends_on:
+      - db
