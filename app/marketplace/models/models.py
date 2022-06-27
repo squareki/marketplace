@@ -26,5 +26,5 @@ class ShopUnit(Base):
     children = relationship("ShopUnit", cascade="all, delete")
 
 # Create the tables in the database
-Base.metadata.drop_all(engine)
-Base.metadata.create_all(engine)
+#Base.metadata.drop_all(engine)
+#Base.metadata.create_all(engine)
